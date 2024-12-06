@@ -1,4 +1,5 @@
-use simple_api_data_extractor::{coinmarketcap::routes, config::load_config};
+use crate::coinmarketcap::routes;
+use crate::config::load_config;
 use actix_web::{test, App};
 
 #[actix_web::test]

@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-api-data-extractor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-api-data-extractor
+  template:
+    metadata:
+      labels:
+        app: simple-api-data-extractor
+    spec:
+      containers:
+        - name: simple-api-data-extractor
+          image: your-docker-image
+          env:
+            - name: STORAGE_BACKEND
+              value: {{ .Values.storageBackend }}
+            - name: S3_BUCKET
+              value: {{ .Values.s3.bucket }}
+            - name: S3_REGION
+              value: {{ .Values.s3.region }}
+            - name: POSTGRES_URL
+              value: {{ .Values.postgres.url }}
+            - name: MINIO_ENDPOINT
+              value: {{ .Values.minio.endpoint }}
+            - name: MINIO_ACCESS_KEY
+              value: {{ .Values.minio.accessKey }}
+            - name: MINIO_SECRET_KEY
+              value: {{ .Values.minio.secretKey }}
+            - name: MINIO_BUCKET
+              value: {{ .Values.minio.bucket }}
