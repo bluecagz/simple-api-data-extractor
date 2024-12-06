@@ -1,0 +1,14 @@
+storageBackend: "minio" # options: "s3", "postgres", "minio"
+
+s3:
+  bucket: "my-s3-bucket"
+  region: "us-west-2"
+
+postgres:
+  url: "postgres://user:password@localhost/db"
+
+minio:
+  endpoint: "http://localhost:9000"
+  accessKey: "minioadmin"
+  secretKey: "minioadmin"
+  bucket: "my-minio-bucket"

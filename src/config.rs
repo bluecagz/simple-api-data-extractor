@@ -9,9 +9,14 @@ pub struct CoinMarketCapConfig {
     pub api_key: String,
 }
 
-pub fn load_config() -> Result<CoinMarketCapConfig, Box<dyn std::error::Error>> {
+#[derive(Debug, Deserialize)]
+pub struct Config {
+    pub coinmarketcap: CoinMarketCapConfig,
+}
+
+pub fn load_config() -> Result<Config, Box<dyn std::error::Error>> {
     let config_content = fs::read_to_string("config.toml")?;
-    let config: CoinMarketCapConfig = toml::from_str(&config_content)?;
+    let config: Config = toml::from_str(&config_content)?;
     Ok(config)
 }
 
@@ -22,7 +27,7 @@ mod tests {
     #[test]
     fn test_load_config() {
         let config = load_config().expect("Failed to load config");
-        assert!(!config.base_url.is_empty());
-        assert!(!config.api_key.is_empty());
+        assert!(!config.coinmarketcap.base_url.is_empty());
+        assert!(!config.coinmarketcap.api_key.is_empty());
     }
 }
